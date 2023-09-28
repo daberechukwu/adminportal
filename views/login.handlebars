@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Login / Sign Up Form</title>
+    <link rel="shortcut icon" href="/assets/favicon.ico">
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+    <div class="container">
+        {{#if error}}
+        <p class="error">{{error}}</p>
+        {{/if}}
+        <form class="form" method="POST" action="/login" >
+            <h1 class="form__title">Admin Login</h1>
+            <div class="form__input-group">
+               <input type="email" class="form__input" name="email" placeholder="email" id="email">
+            </div>
+            <div class="form__input-group">
+               <input type="password" class="form__input" name="password" placeholder="password" id="password">
+                <div class="form__input-error-message"></div>
+            </div>
+            <button class="form__button" type="submit">Login</button>
+        </form> 
+        
+    </div>
+    
+</body>

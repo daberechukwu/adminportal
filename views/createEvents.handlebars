@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/form.css">
+
+
+	<title>AdminHub</title>
+</head>
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">PPLE ADMIN</span>
+		</a>
+		<ul class="side-menu top">
+			<li>
+				<a href="/dashboard" id="dashboard">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li>
+				<a href="/users" id="users">
+					<i class='bx bxs-group' ></i>
+					<span class="text">Users</span>
+				</a>
+			</li>
+			<li>
+				<a href="/create-users">
+					<i class='bx bxs-group' ></i>
+					<span class="text">create User</span>
+				</a>
+			</li>
+			<li class="active">
+				<a href="/create-events">
+					<i class='bx bxs-calendar-check' ></i>
+					<span class="text">Create Events</span>
+				</a>
+			</li>
+			<li>
+				<a href="/create-admin">
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text">Create Admin</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text">Analytics</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-message-dots' ></i>
+					<span class="text">Message</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-group' ></i>
+					<span class="text">Admins</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="#">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Settings</span>
+				</a>
+			</li>
+			<li>
+				<a href="/logout" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<a href="#" class="nav-link">Categories</a>
+			<form action="#">
+				<div class="form-input">
+					<input type="search" placeholder="Search...">
+					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			<a href="#" class="notification">
+				<i class='bx bxs-bell' ></i>
+				<span class="num">8</span>
+			</a>
+			<a href="#" class="profile">
+				<img src="img/people.png">
+			</a>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+        <main>
+              <!-- Container Start -->
+              <div class="head-title">
+				<div class="left">
+				</div>
+				<a href="/attach-user" class="btn-download">
+					<span class="text">Attach user to a Event</span>
+				</a>
+			</div>
+			<br/>
+			<div class="head-title">
+				<div class="left">
+				</div>
+				<a href="/unattach-user" class="btn-download">
+					<span class="text">Unattach user from an Event</span>
+				</a>
+			</div>
+  <div id="container">
+    <!-- Form Wrap Start -->
+    <div class="form-wrap">
+      <h1>Create Event</h1>
+      <p>For Admins only!</p>
+      <!-- Form Start -->
+	  {{#if message}}
+       <div style="color: green;">{{message}}</div>
+       {{/if}}
+
+      {{#if error}}
+       <div style="color: red;">{{error}}</div>
+        {{/if}}
+      <form method="POST" action="/create-events"> 
+        <div class="form-group">
+          <label for="first-name">Organizer Name</label>
+          <input type="text" name="organizerName" id="organizerName">
+        </div>
+        <div class="form-group">
+          <label for="last-name">organizer Phone</label>
+          <input type="text" name="organizerPhone" id="organizerPhone">
+        </div>
+        <div class="form-group">
+          <label for="email">Organizer Email</label>
+          <input type="email" name="organizerEmail" id="organizerEmail">
+        </div>
+        <div class="form-group">
+          <label for="title">Tittle</label>
+          <input type="text" name="title" id="title">
+        </div>
+        <div class="form-group">
+          <label for="Details">Details</label>
+          <input type="text" name="detail" id="detail">
+        </div>
+        <div class="form-group">
+          <label for="startDate">Start Date</label>
+          <input type="text" name="startDate" id="startDate">
+        </div>
+        <div class="form-group">
+          <label for="guestLimit">Guest limit</label>
+          <input type="text" name="guestLimit" id="guestLimit">
+        </div>
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input type="text" name="price" id="price">
+        </div>
+        <div class="form-group">
+          <label for="country">Country</label>
+          <input type="text" name="country" id="country">
+        </div>
+        <div class="form-group">
+          <label for="price">State</label>
+          <input type="text" name="state" id="state">
+        </div>
+        <div class="form-group">
+          <label for="price">Address</label>
+          <input type="text" name="address" id="address">
+        </div>
+        <div class="form-group">
+          <label for="card">event Image card</label>
+          <input type="file" id="media" name="media" accept="image/*">
+        </div>
+        <button type="submit">Create Event</button>
+      </form>
+      <!-- Form Close -->
+    </div>
+  </div>
+ </main>
+		
+	</section>
+	<!-- CONTENT -->
+	
+
+	<script src="../js/script.js"></script>
+</body>
+</html>
