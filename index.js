@@ -86,8 +86,8 @@ app.post('/login', async (req, res, next) => {
             console.log('API Response:', data);
 
             if (data && data.token) { // Check if data and data.token are defined
-               
-                 
+                req.user = {
+                    token: data.token
                 };
                 return next(); // Continue to the next middleware
             } else {
