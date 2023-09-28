@@ -3,6 +3,8 @@ const path = require('path');
 const fetch = require('node-fetch');
 const bodyParser = require('body-parser');
 
+
+
 const app = express();
 const port = 3000;
 
@@ -64,14 +66,14 @@ app.get('/unattach-user',(req,res)=>{
 
 
 
-app.post('/login', async (req, res) => {
+app.post('/login', async (req, res, next) => {
     const { email, password } = req.body;
 
     console.log('Email:', email); // Log email for debugging
     console.log('Password:', password); // Log password for debugging
 
     try {
-        const response = await fetch('https://demoapi.ppleapp.com/api/v1/admin/admin-login', {
+        const apiResponse = await fetch('https://demoapi.ppleapp.com/api/v1/admin/admin-login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -79,10 +81,19 @@ app.post('/login', async (req, res) => {
             body: JSON.stringify({ email, password }),
         });
 
-        if (response.ok) {
-            const data = await response.json();
-            console.log('API Response:', data); // Log API response for debugging
-            res.redirect('/dashboard');
+        if (apiResponse.ok) {
+            const data = await apiResponse.json();
+            console.log('API Response:', data);
+
+            if (data && data.token) { // Check if data and data.token are defined
+               
+                 
+                };
+                return next(); // Continue to the next middleware
+            } else {
+                console.error('Login Error: Token not found in API response');
+                return res.render('login', { error: 'An error occurred while logging in' });
+            }
         } else {
             res.render('login', { error: 'Wrong email or password!' });
         }
@@ -90,7 +101,11 @@ app.post('/login', async (req, res) => {
         console.error('Error:', error);
         res.render('login', { error: 'An error occurred while processing your request' });
     }
+}, ensureAuthenticated, (req, res) => {
+    // This middleware function will only be reached if the user is authenticated
+    res.redirect('/dashboard');
 });
+
 
 app.post('/create-admin', async(req,res)=>{
      const {email,name,password,role}= req.body;
@@ -118,6 +133,8 @@ app.post('/create-admin', async(req,res)=>{
 
 app.post('/create-users', async (req, res) => {
     const { firstname, lastname, username, bio, displayName } = req.body;
+
+    const token = req.admin.token;
     console.log('First Name:', firstname);
     console.log('Last Name:', lastname);
     console.log('Username:', username);
@@ -129,6 +146,7 @@ app.post('/create-users', async (req, res) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
             },
             body: JSON.stringify({ firstname, lastname, username, bio, displayName }),
         });
