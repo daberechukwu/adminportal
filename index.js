@@ -66,7 +66,7 @@ app.get('/unattach-user',(req,res)=>{
 
 
 
-app.post('/login', async (req, res, next) => {
+app.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     console.log('Email:', email); // Log email for debugging
@@ -82,18 +82,8 @@ app.post('/login', async (req, res, next) => {
         });
 
         if (apiResponse.ok) {
-            const data = await apiResponse.json();
-            console.log('API Response:', data);
-
-            if (data && data.token) { // Check if data and data.token are defined
-                req.user = {
-                    token: data.token
-                };
-                return next(); // Continue to the next middleware
-            } else {
-                console.error('Login Error: Token not found in API response');
-                return res.render('login', { error: 'An error occurred while logging in' });
-            }
+            // Handle successful login here (e.g., render a success page)
+            return res.render('login-success'); // Replace with your success page
         } else {
             res.render('login', { error: 'Wrong email or password!' });
         }
@@ -101,9 +91,6 @@ app.post('/login', async (req, res, next) => {
         console.error('Error:', error);
         res.render('login', { error: 'An error occurred while processing your request' });
     }
-}, ensureAuthenticated, (req, res) => {
-    // This middleware function will only be reached if the user is authenticated
-    res.redirect('/dashboard');
 });
 
 
