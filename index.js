@@ -83,7 +83,7 @@ app.post('/login', async (req, res) => {
 
         if (apiResponse.ok) {
             // Handle successful login here (e.g., render a success page)
-            return res.render('login-success'); // Replace with your success page
+            return res.render('dashboard'); // Replace with your success page
         } else {
             res.render('login', { error: 'Wrong email or password!' });
         }
@@ -133,7 +133,7 @@ app.post('/create-users', async (req, res) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
+                
             },
             body: JSON.stringify({ firstname, lastname, username, bio, displayName }),
         });
