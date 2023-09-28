@@ -8,11 +8,12 @@
 </head>
 <body>
     <div class="container">
-        {{#if error}}
-        <p class="error">{{error}}</p>
-        {{/if}}
+        
         <form class="form" method="POST" action="/login" >
             <h1 class="form__title">Admin Login</h1>
+            {{#if error}}
+               <p class="error">{{error}}</p>
+            {{/if}}
             <div class="form__input-group">
                <input type="email" class="form__input" name="email" placeholder="email" id="email">
             </div>
