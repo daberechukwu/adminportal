@@ -286,7 +286,9 @@ app.post('/create-events', ensureAuthenicated, async (req, res) => {
                 'Authorization': req.headers.authorization,
             },
             body: JSON.stringify( {  organizerName, organizerPhone, organizerEmail, title,detail,startDate,timeZoneDate,utcOffset,endDate,timeZone,paid,creatorType,landmark,lat,lng,welcomeMsg,ticketLimit,minGuestLimit,isHosted,guestLimit,price,isResellable,resellPrice,country,city,state,address,media }),
+            
         });
+        console.log('API Response Status:', response.status);
 
         if (response.ok) {
             const data = await response.json();
