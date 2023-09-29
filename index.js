@@ -272,21 +272,10 @@ app.post('/unattach-user', ensureAuthenicated, async (req, res) => {
 
 
 app.post('/create-events', ensureAuthenicated, async (req, res) => {
-    const { organizerName, organizerPhone, organizerEmail, title,detail,startDate,guestLimit,price,country,state,address,media } = req.body;
+    const { organizerName, organizerPhone, organizerEmail, title,detail,startDate,timeZoneDate,utcOffset,endDate,timeZone,paid,creatorType,landmark,lat,lng,welcomeMsg,ticketLimit,minGuestLimit,isHosted,guestLimit,price,isResellable,resellPrice,country,city,state,address,media } = req.body;
     
     console.log({
-        organizerName,
-        organizerPhone,
-        organizerEmail,
-        title,
-        detail,
-        startDate,
-        guestLimit,
-        price,
-        country,
-        state,
-        address,
-        media,
+        organizerName, organizerPhone, organizerEmail, title,detail,startDate,timeZoneDate,utcOffset,endDate,timeZone,paid,creatorType,landmark,lat,lng,welcomeMsg,ticketLimit,minGuestLimit,isHosted,guestLimit,price,isResellable,resellPrice,country,city,state,address,media 
     });
     
     try {
@@ -296,7 +285,7 @@ app.post('/create-events', ensureAuthenicated, async (req, res) => {
                 'Content-Type': 'application/json',
                 'Authorization': req.headers.authorization,
             },
-            body: JSON.stringify( { organizerName, organizerPhone, organizerEmail, title,detail,startDate,guestLimit,price,country,state,address,media }),
+            body: JSON.stringify( {  organizerName, organizerPhone, organizerEmail, title,detail,startDate,timeZoneDate,utcOffset,endDate,timeZone,paid,creatorType,landmark,lat,lng,welcomeMsg,ticketLimit,minGuestLimit,isHosted,guestLimit,price,isResellable,resellPrice,country,city,state,address,media }),
         });
 
         if (response.ok) {
